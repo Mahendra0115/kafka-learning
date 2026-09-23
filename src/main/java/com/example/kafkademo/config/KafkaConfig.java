@@ -9,11 +9,10 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic messageTopic() {
-        return new NewTopic("demo-topic", 1, (short) 1);
-    
-//        (short) 1      -----> Kafka me data duplicate copies rakhne ke liye use hota hai. Ex ->  1 ka matlab ek replica hi hai
-//         "demo-topic"   ----> Yahi topic par messages send/consume hote hain. Example: orders, payments, user-signup, email-events
-//             1          ----> Ek topic ke andar multiple partitions ho sakte hain. 
-
+        // Create the Kafka topic used to publish order events
+        // Topic name: order-created
+        // 3 partitions allow messages to be spread across multiple partitions
+        // 1 replica means one copy of the data is kept for redundancy
+        return new NewTopic("order-created", 3, (short) 1);
     }
 }
