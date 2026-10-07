@@ -19,6 +19,7 @@ public class OrderController {
 
         orderProducer.sendOrder(orderEvent);
 
-        return "Order event sent to Kafka";
+        // Interview point: API user orderId bhejta hai; producer orderId ko Kafka key banata hai.
+        return "Order event sent to Kafka with key/orderId: " + orderEvent.getOrderId();
     }
 }
