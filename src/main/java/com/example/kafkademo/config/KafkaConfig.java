@@ -11,7 +11,9 @@ public class KafkaConfig {
     public NewTopic messageTopic() {
         // Create the Kafka topic used to publish order events
         // Topic name: order-created
-        // 3 partitions allow messages to be spread across multiple partitions
+        // Interview point: Partition topic ka small ordered log hota hai.
+        // 3 partitions allow messages to be spread across multiple partitions for parallel processing.
+        // Ordering sirf same partition ke andar maintain hoti hai, poore topic me nahi.
         // 1 replica means one copy of the data is kept for redundancy
         return new NewTopic("order-created", 3, (short) 1);
     }
