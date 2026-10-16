@@ -1,6 +1,9 @@
 package com.example.kafkademo.producer;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
 import com.example.kafkademo.model.OrderEvent;
@@ -14,12 +17,11 @@ public class OrderProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendOrder(OrderEvent orderEvent) {
+   public CompletableFuture<SendResult<String, OrderEvent>>
+            sendOrder(OrderEvent orderEvent) {
 
-        // Send the order event to Kafka topic
-        kafkaTemplate.send("order-created", orderEvent);
-
-        // Log confirmation after sending the message
-        System.out.println("Message sent: " + orderEvent);
+        return kafkaTemplate.send("order-created", orderEvent);
     }
+
+
 }
